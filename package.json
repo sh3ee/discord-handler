@@ -1,0 +1,22 @@
+{
+  "name": "@application/bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "structures/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "glob": "^10.4.3"
+  },
+  "keywords": [
+    "discord-bot"
+  ],
+  "author": "",
+  "license": "MIT"
+}
