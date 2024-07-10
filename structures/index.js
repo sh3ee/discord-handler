@@ -1,5 +1,5 @@
-const { CustomClient } = require('./classes/customclient.js');
-require('../lib/plugins/crashdefender.js').Shield();
+const { CustomClient } = require('./classes/customClient.js');
+require('../lib/plugins/crashDefender.js').Shield();
 const appUtil = require('../lib/functions/application-ecs-loader.js');
 const { GatewayIntentBits, Partials } = require('discord.js');
 

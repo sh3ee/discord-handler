@@ -34,7 +34,7 @@ type CommandData = CommandProps<ApplicationCommandType> & {
 interface SlashCommandsData {
   data: CommandData;
   others: AdditionalOptions;
-  script: (options: { client: import('../../structures/classes/customclient.js').CustomClient, interaction: import('discord.js').CommandInteraction }) => Promise<any>;
+  script: (options: { client: import('../../structures/classes/customClient.js').CustomClient, interaction: import('discord.js').CommandInteraction }) => Promise<any>;
 };
 
 
@@ -70,11 +70,11 @@ interface MessageCommandsData {
    * It helps organize commands based on their functionality or purpose.
    *
    * @example
-   * group: ['admin', 'moderation']
+   * group: 'admin'
    */
-  group?: string[];
+  group?: string;
   others: AdditionalOptions;
-  script: (options: { client: import('../../structures/classes/customclient.js').CustomClient, message: import('discord.js').Message, args: string[] }) => Promise<any>;
+  script: (options: { client: import('../../structures/classes/customClient.js').CustomClient, message: import('discord.js').Message, args: string[] }) => Promise<any>;
 };
 
 export { SlashCommandsData, MessageCommandsData };

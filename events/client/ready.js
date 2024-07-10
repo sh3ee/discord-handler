@@ -2,7 +2,7 @@ const { setTimeout: sleep } = require('node:timers/promises');
 const appUtil = require('../../lib/functions/application-ecs-loader.js');
 const { logger } = require('../../lib/functions/common.js');
 const { Events } = require('discord.js');
-const { CustomClient } = require('../../structures/classes/customclient.js');
+const { CustomClient } = require('../../structures/classes/customClient.js');
 
 module.exports = {
   event: Events.ClientReady,

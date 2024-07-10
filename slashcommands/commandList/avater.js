@@ -3,9 +3,9 @@ const { ApplicationCommandType } = require('discord.js');
 
 module.exports = {
   data: {
-    type: ApplicationCommandType.User,
     name: 'Avater',
-    dmPermission: false
+    dmPermission: false,
+    type: ApplicationCommandType.User
   },
 
   others: {

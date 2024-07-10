@@ -3,10 +3,10 @@ const { ApplicationCommandType } = require('discord.js');
 
 module.exports = {
   data: {
-    type: ApplicationCommandType.ChatInput,
     name: 'ping',
     description: 'Get information about the bot.',
-    dmPermission: false
+    dmPermission: false,
+    type: ApplicationCommandType.ChatInput
   },
 
   others: {

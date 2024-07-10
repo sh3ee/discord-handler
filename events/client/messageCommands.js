@@ -1,4 +1,4 @@
-const { CustomClient } = require('../../structures/classes/customclient.js');
+const { CustomClient } = require('../../structures/classes/customClient.js');
 const { Events, Message, EmbedBuilder } = require('discord.js');
 const { clientPrefix } = require('../../lib/configuration.json');
 
