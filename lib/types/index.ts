@@ -32,7 +32,13 @@ type CommandData = CommandProps<ApplicationCommandType> & {
 };
 
 interface SlashCommandsData {
+  /**
+   * All the available `/` commands JSON parameters to create commands.
+   */
   data: CommandData;
+  /**
+   * This Options displaying all permissions and additional utility features.
+   */
   others: AdditionalOptions;
   script: (options: { client: import('../../structures/classes/customClient.js').CustomClient, interaction: import('discord.js').CommandInteraction }) => Promise<any>;
 };
@@ -73,6 +79,9 @@ interface MessageCommandsData {
    * group: 'admin'
    */
   group?: string;
+  /**
+   * This Options displaying all permissions and additional utility features.
+   */
   others: AdditionalOptions;
   script: (options: { client: import('../../structures/classes/customClient.js').CustomClient, message: import('discord.js').Message, args: string[] }) => Promise<any>;
 };
