@@ -11,4 +11,4 @@ const client = new CustomClient({
     ],
 });
 
-client.setMaxListeners(0); appUtil.loadEvents(client); client.start();
+client.setMaxListeners(0); appUtil.loadEvents(client); client.connect();
