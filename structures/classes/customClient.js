@@ -7,7 +7,7 @@ class CustomClient extends Client {
     icon = require('../../lib/plugins/design/icons.js').icon;
      developer = developerIds;
 
-  start() {
+ connect() {
     this.login(clientToken);
   };
 };
