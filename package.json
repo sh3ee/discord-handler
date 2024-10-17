@@ -1,8 +1,8 @@
 {
-  "name": "discord-handler",
+  "name": "@discord-handler/bot",
   "version": "1.0.0",
   "description": "Node.JS version 16.9.0 or higher (prefer latest LTS version). This repository is a basic template to get started your Discord \"App\" in Discord.JS v14.",
-  "main": "structures/index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node structures/index.js"
@@ -11,7 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^14.15.3",
+    "discord.js": "^14.16.3",
     "glob": "^11.0.0"
   }
 }
