@@ -1,6 +1,5 @@
 const { CustomClient } = require('./classes/customClient.js');
-require('./lib/plugins/crashDefender.js').Shield();
-const appUtil = require('./lib/functions/application-ecs-loader.js');
+const app = require('./lib/functions/application-ecs-loader.js');
 const { GatewayIntentBits } = require('discord.js');
 
 const client = new CustomClient({
@@ -12,10 +11,9 @@ const client = new CustomClient({
 });
 
 client.setMaxListeners(0);
-(async function () {
-    await appUtil.loadEvents(client);
-    await appUtil.loadMessages(client);
-    await appUtil.loadSlashCommands(client);
-})()
+app.loadEvents(client);
 
 client.connect();
+
+process.on('uncaughtException', (err, origin) => { console.error(err, origin); });
+process.on('unhandledRejection', (reason, p) => { console.error(reason, p); });
