@@ -16,7 +16,7 @@ module.exports = {
         devOnly: true,
     },
 
-    script: async function ({ client, message, args }) {
+    execute: async function ({ client, message, args }) {
         try {
             if (/\bclient\.token\b/g.test(args.join(' '))) {
                 return message.reply('No token grabbing.');

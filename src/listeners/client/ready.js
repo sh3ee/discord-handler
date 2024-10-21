@@ -11,7 +11,7 @@ module.exports = {
    * @param {CustomClient} client;
    */
 
-  script: async (client) => {
+  execute: async (client) => {
     await app.loadMessages(client);
     await sleep(3000)
     await app.loadSlashCommands(client);

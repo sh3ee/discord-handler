@@ -1,5 +1,5 @@
 const { CustomClient } = require('./classes/customClient.js');
-const app = require('./lib/functions/application-ecs-loader.js');
+const { loadEvents } = require('./lib/functions/application-ecs-loader.js');
 const { GatewayIntentBits } = require('discord.js');
 
 const client = new CustomClient({
@@ -10,9 +10,10 @@ const client = new CustomClient({
     ],
 });
 
-client.setMaxListeners(0);
-app.loadEvents(client);
+loadEvents(client);
+module.exports = client;
 
+client.setMaxListeners(0);
 client.connect();
 
 process.on('uncaughtException', (err, origin) => { console.error(err, origin); });

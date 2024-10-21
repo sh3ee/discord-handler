@@ -14,7 +14,7 @@ module.exports = {
     devOnly: false
   },
 
-  script: async function ({ client, interaction }) {
+  execute: async function ({ client, interaction }) {
     const target = interaction.guild.members.cache.get(interaction.targetId) ||
       await interaction.guild.members.fetch(interaction.targetId);
 

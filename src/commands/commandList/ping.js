@@ -10,7 +10,7 @@ module.exports = {
     devOnly: false
   },
 
-  script: async function ({ client, message, args }) {
+  execute: async function ({ client, message, args }) {
     return message.reply({ content: `Ping: **${client.ws.ping} ms**` });
   }
 };

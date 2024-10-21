@@ -1,4 +1,4 @@
-const { glob } = require('glob'); 
+const { glob } = require('glob');
 const path = require('node:path');
 
 /**
@@ -12,8 +12,12 @@ function deleteCache(file) {
 /**
  * @param {String} folderName
  */
-exports.loadFiles = async function (folderName) {
+async function loadFiles(folderName) {
     const files = await glob(path.join(process.cwd(), folderName, '**/*.js').replace(/\\/g, '/'));
     await Promise.all(files.map(deleteCache));
     return files;
+}
+
+module.exports = {
+    loadFiles
 }

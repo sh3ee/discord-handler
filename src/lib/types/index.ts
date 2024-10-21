@@ -40,7 +40,7 @@ interface SlashCommandsData {
    * This Options displaying all permissions and additional utility features.
    */
   others: AdditionalOptions;
-  script: (options: { client: import('../../classes/customClient.js').CustomClient, interaction: import('discord.js').CommandInteraction }) => Promise<any>;
+  execute: (options: { client: import('../../classes/customClient.js').CustomClient, interaction: import('discord.js').CommandInteraction }) => Promise<any>;
 };
 
 
@@ -83,7 +83,7 @@ interface MessageCommandsData {
    * This Options displaying all permissions and additional utility features.
    */
   others: AdditionalOptions;
-  script: (options: { client: import('../../classes/customClient.js').CustomClient, message: import('discord.js').Message, args: string[] }) => Promise<any>;
+  execute: (options: { client: import('../../classes/customClient.js').CustomClient, message: import('discord.js').Message, args: string[] }) => Promise<any>;
 };
 
 export { SlashCommandsData, MessageCommandsData };

@@ -3,7 +3,7 @@ const { ApplicationCommandType, Events } = require('discord.js');
 const { ChatInput, User, Message } = ApplicationCommandType;
 const { logger, print } = require('../functions/common.js');
 
-exports.loadEvents = async function (client) {
+async function loadEvents(client) {
   console.log(print.underscore(`\n✎ ᴇᴠᴇɴᴛ-ʟᴏᴀᴅᴇʀ-ʀᴜɴɪɴɢ...`));
 
   const files = await loadFiles('src/listeners');
@@ -17,19 +17,19 @@ exports.loadEvents = async function (client) {
       continue;
     }
 
-    if (typeof event.script !== 'function') {
+    if (typeof event.execute !== 'function') {
       logger.Warn(file, `command does not have a callback function.`);
       continue;
     }
 
-    if (event.once) client.once(event.event, (...args) => event.script(client, ...args));
-    else client.on(event.event, (...args) => event.script(client, ...args));
+    if (event.once) client.once(event.event, (...args) => event.execute(client, ...args));
+    else client.on(event.event, (...args) => event.execute(client, ...args));
 
     logger.Info(event.event, `successfully Loaded.`);
   }
 };
 
-exports.loadMessages = async function (client) {
+async function loadMessages(client) {
   console.log(print.underscore(`\n✎ ᴍᴇssᴀɢᴇ-ᴄᴏᴍᴍᴀɴᴅ-ʟᴏᴀᴅᴇʀ-ʀᴜɴɪɴɢ...`));
 
   const files = await loadFiles('src/commands');
@@ -47,8 +47,8 @@ exports.loadMessages = async function (client) {
       continue;
     }
 
-    if (typeof command.script !== 'function') {
-      logger.Warn(file, `command file ${command.alias.join(',')} does not export "script" as a function.`);
+    if (typeof command.execute !== 'function') {
+      logger.Warn(file, `command file ${command.alias.join(',')} does not export "execute" as a function.`);
       continue;
     }
 
@@ -57,7 +57,7 @@ exports.loadMessages = async function (client) {
   }
 };
 
-exports.loadSlashCommands = async function (client) {
+async function loadSlashCommands(client) {
   console.log(print.underscore(`\n✎ sʟᴀsʜ-ᴄᴏᴍᴍᴀɴᴅ-ʟᴏᴀᴅᴇʀ-ʀᴜɴɪɴɢ...`));
 
   const files = await loadFiles('src/slashcommands');
@@ -88,8 +88,8 @@ exports.loadSlashCommands = async function (client) {
       continue;
     }
 
-    if (typeof command.script !== 'function') {
-      logger.Warn(file, `command file ${command.data.name} does not export "script" as a function.`);
+    if (typeof command.execute !== 'function') {
+      logger.Warn(file, `command file ${command.data.name} does not export "execute" as a function.`);
       continue;
     }
 
@@ -99,5 +99,11 @@ exports.loadSlashCommands = async function (client) {
     logger.Info(command.data.name, `successfully loaded.`);
   }
 
-  // client.application.commands.set(CommandsArray);
+  client.application.commands.set(CommandsArray);
 };
+
+module.exports = {
+  loadEvents,
+  loadMessages,
+  loadSlashCommands
+}

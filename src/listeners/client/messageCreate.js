@@ -10,7 +10,7 @@ module.exports = {
      * @param {CustomClient} client
      */
 
-    script: async (client, message) => {
+    execute: async (client, message) => {
         if (message.channel.type !== 0) return;
         if (
             message.author.bot ||
@@ -34,6 +34,6 @@ module.exports = {
         if (command.others.botPermissions && command.others.botPermissions.length !== 0)
             if (!message.guild.members.me.permissions.has(command.others.botPermissions)) return message.reply({ embeds: [embed.setDescription(`${client.icon.static.wrong} I need \`${command.others.botPermissions || command.others.botPermissions.join(", ")}\` permission(s) to execute this command!`)] });
 
-        command.script({ client, message, args });
+        command.execute({ client, message, args });
     }
 };

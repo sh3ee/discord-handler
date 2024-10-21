@@ -9,7 +9,7 @@ module.exports = {
      * @param {CustomClient} client
      */
 
-    script: async (client, interaction) => {
+    execute: async (client, interaction) => {
         if (
             !interaction.isChatInputCommand() && !interaction.isContextMenuCommand() && !interaction.isAutocomplete()
         ) return;
@@ -26,6 +26,6 @@ module.exports = {
         if (command.others.botPermissions && command.others.botPermissions.length !== 0)
             if (!interaction.guild.members.me.permissions.has(command.others.botPermissions)) return interaction.reply({ embeds: [embed.setDescription(`${client.icon.static.wrong} I need \`${command.others.botPermissions || command.others.botPermissions.join(', ')}\` permission(s) to execute this command!`)], ephemeral: true });
 
-        command.script({ client, interaction });
+        command.execute({ client, interaction });
     }
 };

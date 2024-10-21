@@ -15,7 +15,7 @@ module.exports = {
     devOnly: false
   },
 
-  script: async function ({ client, interaction }) {
+  execute: async function ({ client, interaction }) {
     return interaction.reply({ content: `Ping: **${client.ws.ping} ms**` });
   }
 };
