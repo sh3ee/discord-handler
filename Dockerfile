@@ -6,4 +6,4 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 
-CMD [ "node", "structures/index.js" ]
+CMD [ "node", "src/index.js" ]
