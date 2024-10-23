@@ -14,7 +14,7 @@ module.exports = {
         'ev'
     ],
     desc: 'Get info about bot',
-    
+
     others: {
         botPermissions: ['SendMessages'],
         userPermissions: ['SendMessages'],
@@ -25,7 +25,7 @@ module.exports = {
         try {
             const code = args.join(' ');
             if (/\bclient\.token\b/g.test(code)) return message.reply('No token grabbing.');
-            
+
             const evaled = await eval(code),
                 output = inspect(evaled);
 
@@ -41,14 +41,14 @@ module.exports = {
                 });
             }
 
-            sendResult(output, 'js')
+            sendResult(message, output, 'js')
         } catch (err) {
-            sendResult(err, 'js')
+            sendResult(message, err, 'js')
         }
     },
 };
 
-function sendResult(value, formate) {
+function sendResult(message, value, formate) {
     return message.channel.send(
         {
             content:
