@@ -1,5 +1,7 @@
-const animated = { diamond: '<a:diamond:1112979860185432066>', gold: '<a:gold:1188754787404091432>' };
-const static = { right: '<:right:1118158799178567800>', wrong: '<:wrong:1118158803595182090>' };
+const emojiList = {}
 
-exports.static = static;
-exports.animated = animated;
+emojiList.true        = '<:true:1291640888002609224>';
+emojiList.false       = '<:false:1291640884852559922>';
+emojiList.null        = '<:null:1300082125139214378>';
+
+module.exports = emojiList;

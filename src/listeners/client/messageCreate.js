@@ -30,9 +30,9 @@ module.exports = {
         const embed = new EmbedBuilder().setColor('Red')
         if (command.others.devOnly && !client.developer.includes(message.author.id)) return;
         if (command.others.userPermissions && command.others.userPermissions.length !== 0)
-            if (!message.member.permissions.has(command.others.userPermissions)) return message.reply({ embeds: [embed.setDescription(`${client.icon.static.wrong} You need \`${command.others.userPermissions || command.others.userPermissions.join(", ")}\` permission(s) to execute this command!`)] });
+            if (!message.member.permissions.has(command.others.userPermissions)) return message.reply({ embeds: [embed.setDescription(`${client.icon.false} You need \`${command.others.userPermissions || command.others.userPermissions.join(", ")}\` permission(s) to execute this command!`)] });
         if (command.others.botPermissions && command.others.botPermissions.length !== 0)
-            if (!message.guild.members.me.permissions.has(command.others.botPermissions)) return message.reply({ embeds: [embed.setDescription(`${client.icon.static.wrong} I need \`${command.others.botPermissions || command.others.botPermissions.join(", ")}\` permission(s) to execute this command!`)] });
+            if (!message.guild.members.me.permissions.has(command.others.botPermissions)) return message.reply({ embeds: [embed.setDescription(`${client.icon.false} I need \`${command.others.botPermissions || command.others.botPermissions.join(", ")}\` permission(s) to execute this command!`)] });
 
         command.execute({ client, message, args });
     }
