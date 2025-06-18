@@ -1,15 +1,15 @@
 const { developerIds, clientToken } = require('../lib/config.json');
-const { Client, Collection } = require('discord.js');
+const { Client, Collection, version } = require('discord.js');
 
 class CustomClient extends Client {
-  messageCommands = new Collection();
-   slashCommands = new Collection();
-    icon = require('../lib/emojis/emojiData.js');
-     developer = developerIds;
+    messageCommands = new Collection();
+    slashCommands = new Collection();
+    developer = developerIds;
 
- connect() {
-    this.login(clientToken);
-  };
+    start() {
+        console.log(`◌ discord.js ${version} | ◌ NodeJs ${process.versions.node}`)
+        this.login(clientToken);
+    };
 };
 
 module.exports = { CustomClient };

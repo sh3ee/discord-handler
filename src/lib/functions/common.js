@@ -3,7 +3,7 @@ const print      = {};
 print.reset      = (text) => `${text}${resetColor}`;
 print.bright     = (text) => `\x1b[1m${text}${resetColor}`;
 print.dim        = (text) => `\x1b[2m${text}${resetColor}`;
-print.underscore = (text) => `\x1b[4m${text}${resetColor}`;
+print.underline  = (text) => `\x1b[4m${text}${resetColor}`;
 print.blink      = (text) => `\x1b[5m${text}${resetColor}`;
 print.reverse    = (text) => `\x1b[7m${text}${resetColor}`;
 print.hidden     = (text) => `\x1b[8m${text}${resetColor}`;
@@ -42,12 +42,13 @@ function dateTime(d) {
 
 const logger = {};
 
-logger.Info  = (n, m) => console.log('✔', print.green('  INFO'), ' ', print.blue(n.padEnd(20)), print.green(m.padEnd(25)), print.gray(dateTime(new Date())))
-logger.Warn  = (n, m) => console.log('✖', print.yellow('  WARN'), ' ', print.blue(n.padEnd(20)), print.yellow(m.padEnd(25)), print.gray(dateTime(new Date())))
-logger.Error = (n, m) => console.log('⚠', print.red('  ERROR'), ' ', print.blue(n.padEnd(20)), print.red(m.padEnd(25)), print.gray(dateTime(new Date())))
+logger.Info  = (n, m) => console.log('✔', print.green('  INFO'), ' ', print.blue(n.padEnd(20)), print.green(m.padEnd(10)), print.gray(dateTime(new Date())))
+logger.Warn  = (n, m) => console.log('✖', print.yellow('  WARN'), ' ', print.blue(n.padEnd(20)), print.yellow(m.padEnd(10)), print.gray(dateTime(new Date())))
+logger.Error = (n, m) => console.log('⚠', print.red('  ERROR'), ' ', print.blue(n.padEnd(20)), print.red(m.padEnd(10)), print.gray(dateTime(new Date())))
 
 
 module.exports = {
   print,
   logger
 };
+

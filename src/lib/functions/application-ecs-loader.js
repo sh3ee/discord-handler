@@ -1,10 +1,9 @@
 const { loadFiles } = require('./fileloader.js');
-const { ApplicationCommandType, Events } = require('discord.js');
-const { ChatInput, User, Message } = ApplicationCommandType;
+const { ApplicationCommandType: { ChatInput, User, Message }, Events } = require('discord.js');
 const { logger, print } = require('../functions/common.js');
 
 async function loadEvents(client) {
-  console.log(print.underscore(`\n✎ ᴇᴠᴇɴᴛ-ʟᴏᴀᴅᴇʀ-ʀᴜɴɪɴɢ...`));
+  console.log(print.underline(`\n✎ ᴇᴠᴇɴᴛ-ʟᴏᴀᴅᴇʀ-ʀᴜɴɪɴɢ...`));
 
   const files = await loadFiles('src/listeners');
   const validEvents = Object.values(Events);
@@ -17,20 +16,15 @@ async function loadEvents(client) {
       continue;
     }
 
-    if (typeof event.execute !== 'function') {
-      logger.Warn(file, `command does not have a callback function.`);
-      continue;
-    }
-
     if (event.once) client.once(event.event, (...args) => event.execute(client, ...args));
     else client.on(event.event, (...args) => event.execute(client, ...args));
 
-    logger.Info(event.event, `successfully Loaded.`);
+    logger.Info(event.event, `Loaded.`);
   }
 };
 
 async function loadMessages(client) {
-  console.log(print.underscore(`\n✎ ᴍᴇssᴀɢᴇ-ᴄᴏᴍᴍᴀɴᴅ-ʟᴏᴀᴅᴇʀ-ʀᴜɴɪɴɢ...`));
+  console.log(print.underline(`\n✎ ᴍᴇssᴀɢᴇ-ᴄᴏᴍᴍᴀɴᴅ-ʟᴏᴀᴅᴇʀ-ʀᴜɴɪɴɢ...`));
 
   const files = await loadFiles('src/commands');
   await client.messageCommands.clear();
@@ -47,18 +41,13 @@ async function loadMessages(client) {
       continue;
     }
 
-    if (typeof command.execute !== 'function') {
-      logger.Warn(file, `command file ${command.alias.join(',')} does not export "execute" as a function.`);
-      continue;
-    }
-
     client.messageCommands.set(command.alias[0], command);
-    logger.Info(command.alias.join(','), `successfully Loaded.`);
+    logger.Info(command.alias.join(','), `Loaded.`);
   }
 };
 
 async function loadSlashCommands(client) {
-  console.log(print.underscore(`\n✎ sʟᴀsʜ-ᴄᴏᴍᴍᴀɴᴅ-ʟᴏᴀᴅᴇʀ-ʀᴜɴɪɴɢ...`));
+  console.log(print.underline(`\n✎ sʟᴀsʜ-ᴄᴏᴍᴍᴀɴᴅ-ʟᴏᴀᴅᴇʀ-ʀᴜɴɪɴɢ...`));
 
   const files = await loadFiles('src/slashcommands');
   await client.slashCommands.clear();
@@ -68,38 +57,35 @@ async function loadSlashCommands(client) {
   for (const file of files) {
     const command = require(file);
 
-    if (!command.data) {
-      logger.Warn(file, 'command file does not export "data"\n@example\n data: {  }');
-      continue;
-    }
-
-    if (!command.data.name) {
+    if (!command.name) {
       logger.Warn(file, 'missing command name. Please provide a valid command to proceed.');
       continue;
     }
 
-    if (command.data.type == ChatInput && !command.data.description) {
+    if (command.type == ChatInput && !command.description) {
       logger.Warn(file, 'a command requires a description. Please provide a description for your commands name.');
       continue;
     }
 
-    if ([User, Message].includes(command.data.type) && command.data.description) {
+    if ([User, Message].includes(command.type) && command.description) {
       logger.Warn(file, 'context commands do not support descriptions.');
       continue;
     }
 
     if (typeof command.execute !== 'function') {
-      logger.Warn(file, `command file ${command.data.name} does not export "execute" as a function.`);
+      logger.Warn(file, `command file ${command.name} does not export "execute" as a function.`);
       continue;
     }
 
-    client.slashCommands.set(command.data.name, command);
-    CommandsArray.push(command.data);
+    client.slashCommands.set(command.name, command);
+ 
+    const { others, execute, ...cmd } = command;
+    CommandsArray.push(cmd);
 
-    logger.Info(command.data.name, `successfully loaded.`);
+    logger.Info(command.name, `Loaded.`);
   }
 
-  client.application.commands.set(CommandsArray);
+  // client.application.commands.set(CommandsArray);
 };
 
 module.exports = {

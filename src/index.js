@@ -8,13 +8,12 @@ const client = new CustomClient({
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
     ],
+    failIfNotExists: false
 });
 
 loadEvents(client);
 module.exports = client;
-
-client.setMaxListeners(0);
-client.connect();
+client.start();
 
 process.on('uncaughtException', (err, origin) => { console.error(err, origin); });
 process.on('unhandledRejection', (reason, p) => { console.error(reason, p); });

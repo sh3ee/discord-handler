@@ -1,50 +1,40 @@
-import { PermissionsString, ApplicationCommandType, ChatInputApplicationCommandData, MessageApplicationCommandData, UserApplicationCommandData } from 'discord.js';
+import { PermissionsString, ApplicationCommandType, ChatInputApplicationCommandData, MessageApplicationCommandData, UserApplicationCommandData, ClientEvents, ChatInputCommandInteraction, UserContextMenuCommandInteraction, MessageContextMenuCommandInteraction, AutocompleteInteraction } from 'discord.js';
+import { CustomClient } from '../../classes/customClient.js';
+
+interface EventData<EventName extends keyof ClientEvents> {
+  name: string;
+  event: EventName;
+  once?: boolean;
+  execute(_client?: CustomClient, ...args: ClientEvents[EventName]): Promise<void>;
+}
+
+export type Event = {
+  [Key in keyof ClientEvents]: EventData<Key>
+}[keyof ClientEvents];
 
 interface AdditionalOptions {
-  /**
-   * A string or array of permissions that the bot needs to execute the current command.
-   *
-   * @example
-   * botPermissions: 'KickMembers'
-   * or
-   * botPermissions: ['KickMembers', 'ModerateMembers']
-   */
   botPermissions?: PermissionsString | PermissionsString[];
-  /**
-   * A string or array of permissions that a user needs for the current command to be executed.
-   *
-   * @example
-   * userPermissions: 'KickMembers'
-   * or
-   * userPermissions: ['KickMembers', 'ModerateMembers']
-   */
   userPermissions?: PermissionsString | PermissionsString[];
-  /**
-   * A boolean value that indicates whether the command is for developer-only registration or not.
-   */
   devOnly?: boolean;
 };
 
-type CommandProps<T> = T extends ApplicationCommandType.ChatInput ? ChatInputApplicationCommandData : T extends ApplicationCommandType.Message ? MessageApplicationCommandData : T extends ApplicationCommandType.User ? UserApplicationCommandData : never;
 
-type CommandData = CommandProps<ApplicationCommandType> & {
+type ApplicationCommandData<T extends ApplicationCommandType> =
+  T extends ApplicationCommandType.ChatInput ? ChatInputApplicationCommandData & { execute(client: CustomClient, interaction: ChatInputCommandInteraction): Promise<void>; autocomplete?(client: CustomClient, interaction: AutocompleteInteraction): Promise<void>; } :
+  T extends ApplicationCommandType.Message ? MessageApplicationCommandData & { execute(client: CustomClient, interaction: MessageContextMenuCommandInteraction): Promise<void>; } :
+  T extends ApplicationCommandType.User ? UserApplicationCommandData & { execute(client: CustomClient, interaction: UserContextMenuCommandInteraction): Promise<void>; } : never;
+
+type CommandData = ApplicationCommandData<ApplicationCommandType> & {
   /* global?: boolean */
-};
-
-interface SlashCommandsData {
-  /**
-   * All the available `/` commands JSON parameters to create commands.
-   */
-  data: CommandData;
   /**
    * This Options displaying all permissions and additional utility features.
    */
   others: AdditionalOptions;
-  execute: (options: { client: import('../../classes/customClient.js').CustomClient, interaction: import('discord.js').CommandInteraction }) => Promise<any>;
 };
 
+export type SlashCommandsData = CommandData;
 
-interface MessageCommandsData {
+export interface MessageCommandsData {
   /**
    * The `alias` are an array of multiple MessageCommands names set that the bot uses to execute the current command.
    * 
@@ -85,5 +75,3 @@ interface MessageCommandsData {
   others: AdditionalOptions;
   execute: (options: { client: import('../../classes/customClient.js').CustomClient, message: import('discord.js').Message, args: string[] }) => Promise<any>;
 };
-
-export { SlashCommandsData, MessageCommandsData };
