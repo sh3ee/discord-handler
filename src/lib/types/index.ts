@@ -1,4 +1,4 @@
-import { PermissionsString, ApplicationCommandType, ChatInputApplicationCommandData, MessageApplicationCommandData, UserApplicationCommandData, ClientEvents, ChatInputCommandInteraction, UserContextMenuCommandInteraction, MessageContextMenuCommandInteraction, AutocompleteInteraction } from 'discord.js';
+import { PermissionsString, ApplicationCommandType, ChatInputApplicationCommandData, MessageApplicationCommandData, UserApplicationCommandData, ClientEvents, ChatInputCommandInteraction, UserContextMenuCommandInteraction, MessageContextMenuCommandInteraction, AutocompleteInteraction, Message } from 'discord.js';
 import { CustomClient } from '../../classes/customClient.js';
 
 interface EventData<EventName extends keyof ClientEvents> {
@@ -73,5 +73,5 @@ export interface MessageCommandData {
    * This Options displaying all permissions and additional utility features.
    */
   others: AdditionalOptions;
-  execute: (options: { client: import('../../classes/customClient.js').CustomClient, message: import('discord.js').Message, args: string[] }) => Promise<any>;
+  execute: (client: CustomClient, message: Message, args: string[]) => Promise<any>;
 };
