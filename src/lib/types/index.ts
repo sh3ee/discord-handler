@@ -32,9 +32,9 @@ type CommandData = ApplicationCommandData<ApplicationCommandType> & {
   others: AdditionalOptions;
 };
 
-export type SlashCommandsData = CommandData;
+export type SlashCommandData = CommandData;
 
-export interface MessageCommandsData {
+export interface MessageCommandData {
   /**
    * The `alias` are an array of multiple MessageCommands names set that the bot uses to execute the current command.
    * 

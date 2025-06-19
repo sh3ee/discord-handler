@@ -1,8 +1,8 @@
 const { ApplicationCommandType } = require('discord.js');
-/** @type {import('../lib/types/index.ts').SlashCommandsData} */
+/** @type {import('../lib/types/index.ts').SlashCommandData} */
 
 module.exports = {
-  name: 'Avater',
+  name: 'Avatar',
   dmPermission: false,
   type: ApplicationCommandType.User,
 

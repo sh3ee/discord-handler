@@ -1,5 +1,5 @@
 const { ApplicationCommandType } = require('discord.js');
-/** @type {import('../lib/types/index.ts').SlashCommandsData} */
+/** @type {import('../lib/types/index.ts').SlashCommandData} */
 
 module.exports = {
   name: 'ping',

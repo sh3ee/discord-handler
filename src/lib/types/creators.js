@@ -8,7 +8,7 @@ function createEvent(data) {
 
 /**
  * Create a slash command
- * @param {import('./index').MessageCommandsData} data
+ * @param {import('./index').MessageCommandData} data
  */
 function createMessage(data) {
   return data;
@@ -17,7 +17,7 @@ function createMessage(data) {
 
 /**
  * Create a slash command
- * @param {import('./index').SlashCommandsData} data
+ * @param {import('./index').SlashCommandData} data
  */
 function createSlash(data) {
   return data;

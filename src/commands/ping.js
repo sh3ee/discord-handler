@@ -1,4 +1,4 @@
-/** @type {import('../lib/types/index.ts').MessageCommandsData} */
+/** @type {import('../lib/types/index.ts').MessageCommandData} */
 
 module.exports = {
 	alias: [

@@ -85,7 +85,7 @@ async function loadSlashCommands(client) {
     logger.Info(command.name, `Loaded.`);
   }
 
-  // client.application.commands.set(CommandsArray);
+  client.application.commands.set(CommandsArray);
 };
 
 module.exports = {
