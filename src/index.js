@@ -1,5 +1,5 @@
 const { CustomClient } = require('./classes/customClient.js');
-const { loadEvents } = require('./lib/functions/application-ecs-loader.js');
+const { AppEvents } = require('./lib/functions/application-ecs-loader.js');
 const { GatewayIntentBits } = require('discord.js');
 
 const client = new CustomClient({
@@ -11,9 +11,9 @@ const client = new CustomClient({
     failIfNotExists: false
 });
 
-loadEvents(client);
+AppEvents(client);
 module.exports = client;
 client.start();
 
-process.on('uncaughtException', (err, origin) => { console.error(err, origin); });
-process.on('unhandledRejection', (reason, p) => { console.error(reason, p); });
+process.on('uncaughtException', (err, origin) => { console.log(err, origin); });
+process.on('unhandledRejection', (reason, p) => { console.log(reason, p); });

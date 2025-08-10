@@ -16,23 +16,22 @@ interface AdditionalOptions {
   botPermissions?: PermissionsString | PermissionsString[];
   userPermissions?: PermissionsString | PermissionsString[];
   devOnly?: boolean;
-};
-
+}
 
 type ApplicationCommandData<T extends ApplicationCommandType> =
   T extends ApplicationCommandType.ChatInput ? ChatInputApplicationCommandData & { execute(client: CustomClient, interaction: ChatInputCommandInteraction): Promise<void>; autocomplete?(client: CustomClient, interaction: AutocompleteInteraction): Promise<void>; } :
   T extends ApplicationCommandType.Message ? MessageApplicationCommandData & { execute(client: CustomClient, interaction: MessageContextMenuCommandInteraction): Promise<void>; } :
   T extends ApplicationCommandType.User ? UserApplicationCommandData & { execute(client: CustomClient, interaction: UserContextMenuCommandInteraction): Promise<void>; } : never;
 
-type CommandData = ApplicationCommandData<ApplicationCommandType> & {
-  /* global?: boolean */
+export type SlashCommandData = ApplicationCommandData<ApplicationCommandType> & {
+
   /**
    * This Options displaying all permissions and additional utility features.
    */
   others: AdditionalOptions;
+  /* global?: boolean */
 };
 
-export type SlashCommandData = CommandData;
 
 export interface MessageCommandData {
   /**
@@ -48,30 +47,8 @@ export interface MessageCommandData {
    */
   desc?: string;
   /**
-   * The `example` of how to use MessageCommands shows that you can add multiple commands in a string or an array.
-   *  
-   * @example
-   * example: ['!ban <user> <reason>','!ban <user>']
-   */
-  example?: string[];
-  /**
-   * The `args` property defines the structure of MessageCommands.
-   *
-   * @example
-   * example: '{user} {reason}'
-   */
-  args?: string;
-  /**
-   * The `group` property defines the category or group to which the command belongs.
-   * It helps organize commands based on their functionality or purpose.
-   *
-   * @example
-   * group: 'admin'
-   */
-  group?: string;
-  /**
    * This Options displaying all permissions and additional utility features.
    */
   others: AdditionalOptions;
   execute: (client: CustomClient, message: Message, args: string[]) => Promise<any>;
-};
+}

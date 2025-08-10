@@ -13,6 +13,6 @@ module.exports = {
 	},
 
 	execute(client, message, args) {
-		message.reply({ content: `Ping: **${client.ws.ping} ms**` });
-	},
+		message.channel.send({ content: `Ping: **${client.ws.ping} ms**` });
+	}
 };

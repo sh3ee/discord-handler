@@ -1,8 +1,8 @@
 const { loadFiles } = require('./fileloader.js');
 const { ApplicationCommandType: { ChatInput, User, Message }, Events } = require('discord.js');
-const { logger, print } = require('../functions/common.js');
+const { logger, print } = require('./common.js');
 
-async function loadEvents(client) {
+async function AppEvents(client) {
   console.log(print.underline(`\n✎ ᴇᴠᴇɴᴛ-ʟᴏᴀᴅᴇʀ-ʀᴜɴɪɴɢ...`));
 
   const files = await loadFiles('src/listeners');
@@ -23,7 +23,7 @@ async function loadEvents(client) {
   }
 };
 
-async function loadMessages(client) {
+async function AppMessages(client) {
   console.log(print.underline(`\n✎ ᴍᴇssᴀɢᴇ-ᴄᴏᴍᴍᴀɴᴅ-ʟᴏᴀᴅᴇʀ-ʀᴜɴɪɴɢ...`));
 
   const files = await loadFiles('src/commands');
@@ -32,11 +32,7 @@ async function loadMessages(client) {
   for (const file of files) {
     const command = require(file);
 
-    if (
-      !command.alias ||
-      command.alias.length === 0 ||
-      (command.alias && command.alias.some((alias) => alias === ''))
-    ) {
+    if (!command.alias || command.alias.length === 0 || (command.alias.some((alias) => alias === ''))) {
       logger.Warn(file, `missing command alias. Please provide a valid command alias to proceed.`);
       continue;
     }
@@ -46,7 +42,7 @@ async function loadMessages(client) {
   }
 };
 
-async function loadSlashCommands(client) {
+async function AppSlashCommands(client) {
   console.log(print.underline(`\n✎ sʟᴀsʜ-ᴄᴏᴍᴍᴀɴᴅ-ʟᴏᴀᴅᴇʀ-ʀᴜɴɪɴɢ...`));
 
   const files = await loadFiles('src/slashcommands');
@@ -77,8 +73,9 @@ async function loadSlashCommands(client) {
       continue;
     }
 
+    command.dmPermission ??= false;
     client.slashCommands.set(command.name, command);
- 
+
     const { others, execute, ...cmd } = command;
     CommandsArray.push(cmd);
 
@@ -89,7 +86,7 @@ async function loadSlashCommands(client) {
 };
 
 module.exports = {
-  loadEvents,
-  loadMessages,
-  loadSlashCommands
+  AppEvents,
+  AppMessages,
+  AppSlashCommands
 }

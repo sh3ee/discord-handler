@@ -3,7 +3,6 @@ const { ApplicationCommandType } = require('discord.js');
 
 module.exports = {
   name: 'Avatar',
-  dmPermission: false,
   type: ApplicationCommandType.User,
 
   others: {
