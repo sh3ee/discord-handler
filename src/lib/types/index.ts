@@ -2,10 +2,7 @@ import { PermissionsString, ApplicationCommandType, ChatInputApplicationCommandD
 import { CustomClient } from '../../classes/customClient.js';
 
 interface EventData<EventName extends keyof ClientEvents> {
-  name: string;
-  event: EventName;
-  once?: boolean;
-  execute(_client?: CustomClient, ...args: ClientEvents[EventName]): Promise<void>;
+  name: string; event: EventName; once?: boolean; execute(_client?: CustomClient, ...args: ClientEvents[EventName]): Promise<void>;
 }
 
 export type Event = {
@@ -13,18 +10,12 @@ export type Event = {
 }[keyof ClientEvents];
 
 interface AdditionalOptions {
-  botPermissions?: PermissionsString | PermissionsString[];
-  userPermissions?: PermissionsString | PermissionsString[];
-  devOnly?: boolean;
+  botPermissions?: PermissionsString | PermissionsString[]; userPermissions?: PermissionsString | PermissionsString[]; devOnly?: boolean;
 }
 
-type ApplicationCommandData<T extends ApplicationCommandType> =
-  T extends ApplicationCommandType.ChatInput ? ChatInputApplicationCommandData & { execute(client: CustomClient, interaction: ChatInputCommandInteraction): Promise<void>; autocomplete?(client: CustomClient, interaction: AutocompleteInteraction): Promise<void>; } :
-  T extends ApplicationCommandType.Message ? MessageApplicationCommandData & { execute(client: CustomClient, interaction: MessageContextMenuCommandInteraction): Promise<void>; } :
-  T extends ApplicationCommandType.User ? UserApplicationCommandData & { execute(client: CustomClient, interaction: UserContextMenuCommandInteraction): Promise<void>; } : never;
+type ApplicationCommandData<T extends ApplicationCommandType> = T extends ApplicationCommandType.ChatInput ? ChatInputApplicationCommandData & { execute(client: CustomClient, interaction: ChatInputCommandInteraction): Promise<void>; autocomplete?(client: CustomClient, interaction: AutocompleteInteraction): Promise<void>; } : T extends ApplicationCommandType.Message ? MessageApplicationCommandData & { execute(client: CustomClient, interaction: MessageContextMenuCommandInteraction): Promise<void>; } : T extends ApplicationCommandType.User ? UserApplicationCommandData & { execute(client: CustomClient, interaction: UserContextMenuCommandInteraction): Promise<void>; } : never;
 
 export type SlashCommandData = ApplicationCommandData<ApplicationCommandType> & {
-
   /**
    * This Options displaying all permissions and additional utility features.
    */
