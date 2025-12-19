@@ -3,14 +3,11 @@ const { clientPrefix } = require('../lib/config.json');
 /** @type {import('../lib/types/index.ts').Event} */
 
 module.exports = {
-    name: '',
-    event: Events.MessageCreate,
+    name: 'onMessage', event: Events.MessageCreate, once: true,
 
     async execute(client, message) {
         if (message.channel.type !== 0) return;
-        if (
-            message.author.bot || !message.guild || !message.content.toLowerCase().startsWith(clientPrefix)
-        ) return;
+        if (message.author.bot || !message.guild || !message.content.toLowerCase().startsWith(clientPrefix)) return;
 
         const [cmd, ...args] = message.content.slice(clientPrefix.length).trim().split(/ +/g);
         const command = client.messageCommands.get(cmd.toLowerCase()) || client.messageCommands.find(c => c.alias?.includes(cmd.toLowerCase()));
@@ -26,4 +23,4 @@ module.exports = {
         }
         command.execute(client, message, args);
     }
-};
+}

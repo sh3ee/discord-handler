@@ -13,4 +13,4 @@ module.exports = {
     const target = interaction.guild.members.cache.get(interaction.targetId) || await interaction.guild.members.fetch(interaction.targetId);
     interaction.reply({ content: target.displayAvatarURL({ extension: 'png', size: 4096 }), flags: 'Ephemeral' });
   }
-};
+}

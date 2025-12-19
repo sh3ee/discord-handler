@@ -13,4 +13,4 @@ module.exports = {
   execute(client, interaction) {
     interaction.reply({ content: `Ping: **${client.ws.ping} ms**`, flags: 'Ephemeral' });
   }
-};
+}
