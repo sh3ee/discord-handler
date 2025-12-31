@@ -7,7 +7,7 @@ module.exports.CustomClient = class CustomClient extends Client {
     developer = developerIds;
 
     start() {
-        console.log(`◌ discord.js ${version} | ◌ NodeJs ${process.versions.node}`);
+        console.log(`◌ discord.js ${version} | ◌ NodeJs ${process.versions.node} ── version*`);
         this.login(clientToken);
     }
 }

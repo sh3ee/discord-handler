@@ -45,7 +45,7 @@ const logger = {};
 
 logger.Info = (n, m) =>
 	console.log(
-		'✔',
+		'✓',
 		print.green('  INFO'),
 		' ',
 		print.blue(n.padEnd(20)),
@@ -54,7 +54,7 @@ logger.Info = (n, m) =>
 	);
 logger.Warn = (n, m) =>
 	console.log(
-		'✖',
+		'✗',
 		print.yellow('  WARN'),
 		' ',
 		print.blue(n.padEnd(20)),
